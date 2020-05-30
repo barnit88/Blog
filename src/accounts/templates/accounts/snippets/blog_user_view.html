@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block headcontentblocks %}
+{% include 'accounts/snippets/headeracount.html' %}
+{% endblock headcontentblocks%}    
+
+
+{% block content %}
+<style type="text/css">
+
+	.left-column{
+		padding:0px;
+	}
+	.right-column{
+		padding:0px;
+	}
+	.lead{
+		font-size: 17px;
+	}
+    .body {
+        margin: 20px;
+    }
+    .text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
+    }
+    .max-lines {
+        display: block;/* or inline-block */
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow: hidden;
+        max-height: 3.6em;
+        line-height: 1.8em;
+    }
+    .container {
+        width: 100%;
+        height: 200px;
+        margin: auto;
+        padding: 10px;
+    }
+    .one {
+        width: 85%;
+        height: 100%;
+        float: left;
+    }
+    .two {
+        margin-left: 85%;
+        height: 100%;
+    }
+    img{
+        max-width: 100%;
+        display: block; /* remove extra space below image */
+    }
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+    .form-signin .form-control {
+        position: relative;
+        box-sizing: border-box;
+        height: auto;
+        padding: 10px;
+        font-size: 16px;
+    }
+    .form-signin .form-control:focus {
+        z-index: 2;
+    }
+    .form-signin input[type="email"] {
+        margin-bottom: 8px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+    .form-signin input[type="text"] {
+        margin-bottom: 8px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }  
+    .form-signin input[type="numeric"] {
+        margin-bottom: 8px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }  
+    .update{
+        margin-top : 40px;
+        margin-bottom: 8px;
+        width : 80
+    }  
+    .any{
+        color : Orange ; 
+
+    }
+    .blog-posts{
+        max-width: 500px;
+        width:100%;
+        margin: auto;
+    } 
+    .bloglist{
+        text-align: left;
+    }
+   
+</style>
+
+
+<!-- main content -->
+<div class="container">
+	<div class="row">
+
+		<!-- blog feed -->
+		<div class="left-column col-lg-7 offset-lg-1">
+
+			<!-- Top 'create post' bar -->
+
+            <div class = "left-column col-lg-7 offset-lg-1">
+            
+                <div class = "d-lg-none mb-3">
+                    <div class="card">
+                  
+                        <section class = "container card-body">
+                        <div class="one"  >    	
+                         	<h5 class="card-title" style = "color:red">{{ request.user.name }}</h5>
+                          	<p class="card-text text ">
+                              <small style = "margin-left:20px;margin-top:10px">{{ request.user.contact }}</small>
+                                <p><strong >{{ request.user.email }}</strong>
+                                </p>
+
+
+                            </p>
+                        </div>
+                        <div class = "two">
+                            <a href = "{% url 'account' %}">
+                            <button class="btn btn-lg btn-primary btn-block update" type="submit" style = "bottom:0;margin-top:100%">Update</button>
+                            </a>
+                        </div>
+                        </section>
+                     </div>	
+
+
+				</div>
+			</div>
+			<!-- end Top 'create post' bar -->
+
+            <!-- Blog posts-->
+            {% if blogs %}
+            {% for blog in blogs %}
+                
+                 <div class="card" style = "margin-bottom: 8px;">
+                   
+                    <a href = "{% url 'blog:delete' blog.slug %}" style = "flex:1;"><div class="card-header">
+                        
+                        <div style = "float: left;">
+                            Published Date : {{ blog.date_published }}
+                        </div>
+                        <div style = "float: right;">
+                            Updated Date : {{ blog.date_updated}}
+                        </div>
+                    
+                    </a></div> 
+                    
+                    <section class = "container card-body">
+                    <div class="one" >    	
+                     	<h5 class="card-title">{{ blog.title}}</h5>
+                      	<p class="card-text text max-lines">{{ blog.body }}</p>
+                    </div>
+                    <div class = "two">
+                        <img src = {{ blog.image.url }}\>
+                    </div>
+                    </section>
+                   
+                 </div>	
+            {% endfor %}
+            {% else %}
+            no thing
+            {% endif %}
+		</div>
+		<!-- end blog feed -->
+
+		<!-- Right 'create post' column  -->
+		<div class="right-column col-lg-3 d-lg-flex d-none flex-column" style = "margin-left:20px">
+
+            <!-- This portion is account form-->
+            <div >
+                <div class = "d-flex flex-column pb-3 ">
+                    <img class = "img-fluid mx-auto d-block" src="{% static 'Overwatch.png' %}" alt = "logo" width = "70" height = "70"/>
+                </div>
+
+                <h1 class="h3 mb-3 font-weight-normal">Account Update</h1>
+                <label class ="any" for="inputName">Your Name</label>
+                <strong class="form-control">{{ request.user.name }}</strong>
+
+                <label class ="any" for="inputContact">Your Contact Number</label>
+                <strong class="form-control">{{ request.user.contact }}</strong>
+
+                <label class ="any" for="inputEmail">Your Valid Email Address</label>
+                <strong class="form-control">{{ request.user.email }}</strong>
+
+                <a href = "{% url 'account' %}">
+                <button class="btn btn-lg btn-primary btn-block update" type="submit">Update</button>
+                </a>
+
+                
+            </div>
+		</div>
+		<!-- end Right 'create post' column  -->
+
+	</div>
+</div>
+
+{% endblock content %}

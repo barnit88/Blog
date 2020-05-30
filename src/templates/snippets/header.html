@@ -1,0 +1,44 @@
+<title> Header </title>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<style>
+
+.container {
+   max-width: 960px;
+   }
+
+   .pricing-header {
+   max-width: 700px;
+   }
+
+   .card-deck .card {
+   min-width: 220px;
+   }
+   .search-bar{
+		max-width: 500px;
+		width: 100%;
+	}
+	.form{
+		width: 100%;
+	}
+
+</style>
+
+   <!-- {% comment %} Yo chai authenticated huda k dekhauney bhanera dynamic banako ..Yo Html page lai extend garney ani block halney 
+   ani base html ma mailey header ko lagi block banako xu ..Tyo block ma chai yo html page extend garney page lai include gardiney 
+   tyesare tyo block ma mailey code pathauxu 
+   {% endcomment %} -->
+   
+   {% if request.user.is_authenticated %}
+      {% block authenticatedheadcontent %}
+      
+      {% endblock authenticatedheadcontent %}
+   {% else %}
+      {% block notauthenticatedheadcontent %}
+
+      {% endblock notauthenticatedheadcontent %}
+   {% endif %}

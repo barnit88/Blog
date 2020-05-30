@@ -1,0 +1,25 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintArgs": [
+        "--load-plugins=pylint_django",
+         "--errors-only" ],
+
+    "python.jediEnabled": false,
+    "files.autoSave": "afterDelay",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": 
+    "automaticallyOverrodeDefaultValue",
+    "editor.minimap.enabled": true,
+    "workbench.colorTheme": "Monokai",
+    "editor.largeFileOptimizations": false,
+    "html.format.indentInnerHtml": true,
+    "html.format.indentHandlebars": true,
+    "emmet.includeLanguages": {"django-html": "html"},
+   
+    "files.associations": {
+        "*.html": "html"
+    },
+    "python.pythonPath": "env\\Scripts\\python.exe",
+    "editor.fontSize": 12
+}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+
+{% block headcontentblocks %}
+    {% include 'blog/snippets/headercreate_blog.html' %}
+{% endblock headcontentblocks%}   
+
+
+{% block content %}
+<style type = "text/css">
+    .card{
+        max-width:700px;
+    }
+    .container{
+        padding : 20px;
+    }
+    .margn{
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .ht-view{
+        height: 900px;
+    }
+</style>
+{% if request.user.email == blog_post.author.email %}
+<div class = "container">
+
+
+    <div class = "row">
+
+        <!--Blog Post-->
+        <div class = "card m-auto" >
+            <img class = "card-img-top card"  src = "{{ blog_post.image.url }}"/>
+            <div class = "card-body my-2">
+                <h2 calss = "card-title">{{ blog_post.title}}</h2>
+                <p class = "card-text">{{ blog_post.body|safe}}</p>
+                {% if blog_post.author == request.user %}
+                    <a href = "{% url 'blog:edit' blog_post.slug %}" class = "margn btn btn-primary"> Update</a>
+                    <button type="button" class="float-right btn btn-primar" data-toggle="modal" data-target="#exampleModal" style = "background-color:red;">
+                        <text style = "color:white">Delete</text>
+                    </button>
+                {% endif %}
+            </div>
+            <div class = "card-footer text-muted">
+                Updated on {{blog_post.date_updated }} by {{blog_post.author.name }}
+            </div>
+        </div>
+        <!--End Of Blog Post-->
+
+    </div>
+
+</div>
+
+
+<!-- Modal -->
+<form method = "POST">
+    {% csrf_token %}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel" style ="color:red;">Do u want to Delete</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Press Confirm to Delete and cancel to cancel 
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% else %}
+Bhaak 
+{% endif %}
+
+{% endblock %}
