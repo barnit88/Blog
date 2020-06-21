@@ -5,11 +5,12 @@ from django.shortcuts import render, redirect,get_object_or_404
 from django.db.models import Q
 from operator import attrgetter
 from django.core.paginator import EmptyPage ,PageNotAnInteger , Paginator
-
+from django.contrib.auth.decorators import login_required
 
 
 
 # Create your views here.
+@login_required()
 def create_blog_view(request):
     context = {}
     
@@ -21,6 +22,8 @@ def create_blog_view(request):
         return redirect('blog:must_authenticate')
 
     form = CreateBlogPostForm(request.POST or None , request.FILES or None)
+    print(request.POST)
+    print(request.FILES)
     if form.is_valid():
         obj = form.save(commit=False)
         author = Account.objects.filter(email = user.email).first()

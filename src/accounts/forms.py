@@ -76,3 +76,6 @@ class AccountUpdateForm(forms.ModelForm):
         if  self.is_valid():
             contact = self.cleaned_data['contact']
             return contact
+
+
+
