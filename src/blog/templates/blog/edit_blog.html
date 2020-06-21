@@ -108,6 +108,7 @@
 			
 	
 		</div>
+	
 	</div>
 </div>
 
@@ -127,5 +128,7 @@
 </script>
 {% else %}
 <P>This is Not allowed </P>
+{{request.user.email}}
+{{blog.author.email}}
 {% endif %}
 {% endblock content %}

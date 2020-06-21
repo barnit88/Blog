@@ -1,6 +1,7 @@
 from django import forms
 
 from blog.models import BlogPost
+from accounts.models import Account
 
 
 class CreateBlogPostForm(forms.ModelForm):
@@ -27,3 +28,4 @@ class UpdateBlogPostForm(forms.ModelForm):
             blog_post.save()
 
         return blog_post
+

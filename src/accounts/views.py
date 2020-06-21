@@ -53,10 +53,12 @@ def logout_view(request):
 
 def login_view(request):
     context = {}
-
+    print("K hudai xa ")
+    print(request,"req")
     user = request.user
     
-    if request.GET:
+    if request.GET.get('q'):
+        print(request.GET ,"Yaha xirya ho ")
         return search(request)
 
     if user.is_authenticated:
@@ -70,6 +72,9 @@ def login_view(request):
             user = authenticate(email = email , password = pasword)
             if user:
                 login(request , user)
+                if request.GET.get('next'):
+                    redirect_post_url = request.GET.get('next')
+                    return redirect(redirect_post_url)
                 return redirect("home:home")
     
     else:

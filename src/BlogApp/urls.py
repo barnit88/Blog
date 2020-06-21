@@ -18,13 +18,20 @@ from django.urls import path , include
 from django.conf.urls.static import static
 from django.conf import settings
 
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('' ,include('home.urls')),
+#     path('register/',include('accounts.urls')),
+#     path('blog', include('blog.urls'))
+# ]
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('' ,include('home.urls')),
-    path('register/',include('accounts.urls')),
-    path('blog', include('blog.urls'))
+    path('' ,include('home.classUrls')),
+    path('register/',include('accounts.classUrls')),
+    path('blog', include('blog.classUrls'))
 ]
-
 
 
 if settings.DEBUG:

@@ -96,6 +96,16 @@
 		<!-- end Right 'create post' column  -->
 
 	</div>
+
+	{{publisher}}
+	<P>{{name}}</P>
+
+	<!-- Yesare chai queryset excess garna sakinxa -->
+	{% for publisher in object_list %}
+			<li>{{ publisher.title }}</li>
+	{% endfor %}
+	<!-- Query set acess gareyko  -->
+
 </div>
 
     

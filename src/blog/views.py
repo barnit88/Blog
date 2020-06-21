@@ -46,10 +46,10 @@ def detail_blog_view(request , slug):
     if request.GET:
         return search(request)
 
-    
+
     blog_post = get_object_or_404(BlogPost , slug= slug)
     context['blog_post'] = blog_post
-
+    
     return render(request , 'blog/detail_blog.html',context)
 
 def delete_blog_view(request, slug):
@@ -86,7 +86,7 @@ def edit_blog_view(request,slug):
             obj.save()
             context['success_message'] = "Blog Post Updated"
             blog_post = obj
-    
+      
     form =UpdateBlogPostForm(
         initial={
             "title": blog_post.title,
@@ -113,6 +113,7 @@ def get_blog_queryset(query=None):
 	return list(set(queryset))   
 
 def search(request):
+    print("Hello")
     context = {}    
     
     query = ""  
